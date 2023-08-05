@@ -3,7 +3,7 @@ import BookListItem from "../book-list-item/book-list-item";
 import { connect } from "react-redux";
 import withBookstoreService from "../hoc/with-bookstore-service";
 import { booksLoaded } from '../../actions/index'
-import "./book-list.module.css";
+import s from "./book-list.module.css";
 import compose from "../../utils";
 
 class BookList extends Component {
@@ -22,7 +22,7 @@ class BookList extends Component {
       <ul>
         {books.map((book) => {
           return (
-            <li key={book.id}>
+            <li key={book.id} className={s.book_list}>
               <BookListItem book={book} />
             </li>
           );
