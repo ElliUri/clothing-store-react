@@ -2,25 +2,30 @@ import React, { Component } from "react";
 import BookListItem from "../book-list-item/book-list-item";
 import { connect } from "react-redux";
 import withBookstoreService from "../hoc/with-bookstore-service";
-import { booksLoaded } from '../../actions/index'
+import { booksLoaded, booksRequested} from '../../actions/index'
 import s from "./book-list.module.css";
 import compose from "../../utils";
+import Spinner from '../spinner/spinner'
 
 class BookList extends Component {
   componentDidMount() {
-    // 1. recieve data
-    const { bookstoreService } = this.props;
-    const data = bookstoreService.getBooks();
-
-    // 2. dispatch action to store
-    this.props.booksLoaded(data)
+    const { bookstoreService, booksLoaded, booksRequested } = this.props;
+    booksRequested()
+    bookstoreService.getBooks()
+    .then((data) => { booksLoaded(data)
+    });
   }
   render() {
-    const { books } = this.props;
+    const { books, loading } = this.props;
+
+    if (loading) {
+      return <Spinner />
+    }
 
     return (
       <ul>
-        {books.map((book) => {
+        {
+        books.map((book) => {
           return (
             <li key={book.id} className={s.book_list}>
               <BookListItem book={book} />
@@ -32,12 +37,13 @@ class BookList extends Component {
   }
 }
 
-const mapStateToProps = ({ books }) => {
-  return { books };
+const mapStateToProps = ({ books, loading }) => {
+  return { books, loading };
 };
 
 const mapDispatchToProps =  {
-  booksLoaded
+  booksLoaded,
+  booksRequested
 };
 
 export default compose(
