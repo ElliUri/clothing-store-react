@@ -3,9 +3,7 @@ import s from './booklist.module.css'
 
 
 const BookListItem = ({ book }) => {
-
     const {title, author, price, coverImage} = book;
-
   return (
       <div className={s.book_list_item}>
         <div className={s.book_cover}>

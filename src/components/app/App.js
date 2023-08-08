@@ -4,7 +4,6 @@ import ShopHeader from '../shop-header/shop-header';
 import HomePage from '../pages/homePage'
 import CartPage from '../pages/cartPage'
 
-
 function App() {
   return (
     <>
