@@ -15,7 +15,6 @@ const ShoppingCartTable = () => {
           <th>Action</th>
           </tr> 
         </thead>
-
         <tbody>
           <tr>
             <td>1</td>
@@ -36,7 +35,6 @@ const ShoppingCartTable = () => {
           </tr>
         </tbody>
       </table>
-
       <div className={s.total}>
         Total: $201
       </div>
